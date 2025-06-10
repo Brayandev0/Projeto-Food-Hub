@@ -1,4 +1,4 @@
-// File: D:\Users\1062027\Desktop\next\foodhub\src\app\layout.tsx
+// File: C:\Users\1062027\Documents\GitHub\Projeto-Food-Hub\Front-End\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

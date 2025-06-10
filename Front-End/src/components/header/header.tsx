@@ -37,11 +37,8 @@ export function HeaderPrincipal() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/cart" className="cart-icon">
-                                    <i className="fas fa-shopping-cart"></i>
-                                    <span className="cart-counter" id="cartCounter">
-                                        0
-                                    </span>
+                                <Link href="/cadastro" className="btn-login">
+                                    Cadastro
                                 </Link>
                             </li>
                         </ul>
