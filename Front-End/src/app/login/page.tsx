@@ -1,13 +1,42 @@
-"use client"
-import "./login.css"
+"use client";
+import "./login.css";
+
 export default function LoginPage() {
+  const handlesubmit = async (evento: any) => {
+    evento.preventDefault();
+
+    const formData = new FormData(evento.target);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const resposta = await fetch("http://127.0.0.1:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const dados = await resposta.json();
+
+      if (!dados.token) {
+        alert("Usuário ou senha inválidos");
+        return;
+      }
+
+      alert("Login realizado com sucesso");
+      localStorage.setItem("tokenAuth", dados.token);
+      window.location.href = "/home";
+    } catch (erro) {
+      console.error("Erro ao realizar login:", erro);
+      alert("Erro ao conectar com o servidor");
+    }
+  };
+
+  return (    <div className="div-principal" >
 
 
-  return (
-    <div className="div-principal" >
-
-
-      <form className="form_container">
+      <form className="form_container" onSubmit={handlesubmit}>
 
         <div className="title_container">
           <p className="title">Bem vindo de Volta!</p>
@@ -85,7 +114,7 @@ export default function LoginPage() {
           <input
             placeholder="Password"
             title="Input title"
-            name="password"
+            name="senha"
             type="password"
             className="input_field"
             id="password_field"
@@ -101,28 +130,7 @@ export default function LoginPage() {
           <span>Or</span>
           <hr className="line" />
         </div>
-        <button title="Realize o login com Google" type="button" className="sign-in_ggl">
-          <svg
-            height="18"
-            width="18"
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <path
-                d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
-                id="A"
-              ></path>
-            </defs>
-            <g transform="matrix(.727273 0 0 .727273 -.954545 -1.45455)">
-              <path fill="#fbbc05" d="M0 37V11l17 13z"></path>
-              <path fill="#ea4335" d="M0 11l17 13 7-6.1L48 14V0H0z"></path>
-              <path fill="#34a853" d="M0 37l30-23 7.9 1L48 0v48H0z"></path>
-              <path fill="#4285f4" d="M48 48L17 24l-4-3 35-10z"></path>
-            </g>
-          </svg>
-          <span>Sign In with Google</span>
-        </button>
+
         <button title="Cadastre-se" type="button" className="sign-in_ggl">
 
           <svg
@@ -146,4 +154,4 @@ export default function LoginPage() {
       </form>
     </div>
   );
-}
+  }

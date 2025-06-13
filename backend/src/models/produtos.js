@@ -1,4 +1,5 @@
 import { database } from "./database.js";
+import { DataTypes } from "sequelize";
 
 export const Produto = database.define("Produto", {
     id_Produtos: {
@@ -7,7 +8,7 @@ export const Produto = database.define("Produto", {
       primaryKey: true,
     },
     nome_Produto: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.STRING(90),
       allowNull: false,
     },
     Valor_Produto: {
@@ -26,7 +27,7 @@ export const Produto = database.define("Produto", {
       type: DataTypes.STRING(80),
     },
     caminho_img: {
-      type: DataTypes.STRING(36),
+      type: DataTypes.STRING(500),
     },
     Estimativa_Entrega: {
       type: DataTypes.STRING(36),
@@ -36,7 +37,11 @@ export const Produto = database.define("Produto", {
     },
     PrecoPromocional: {
       type: DataTypes.INTEGER,
+      allowNull: true,
     },
+    descricao:{
+      type: DataTypes.STRING(200),
+    }
   }, {
     tableName: "Produtos",
     timestamps: false,

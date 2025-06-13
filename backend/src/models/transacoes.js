@@ -1,4 +1,6 @@
-import { database } from "./database";
+import { database } from "./database.js";
+import { DataTypes } from "sequelize";
+
 
 export const Transacao = database.define("Transacao", {
     id_Transacao: {

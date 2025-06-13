@@ -5,51 +5,61 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Home() {
-  useEffect(() => {
-    async function fetchProdutos() {
-      try {
-        const res = await fetch("http://127.0.0.1:8080/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({key:"95672347234534"})
-        });
-        console.log("Resposta da API:", res);
-
-        if (!res.ok) throw new Error("Erro ao buscar produtos");
-
-        const produtos = await res.json();
-        const grid = document.querySelector('.products-grid');
-
-        if (grid && Array.isArray(produtos)) {
-          grid.innerHTML = produtos.map(prod => `
-      <div class="product-card">
-        <div class="product-image">
-          <img src="${prod.caminho_img}" alt="${prod.nome}">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">${prod.nome}</h3>
-          <p class="product-category">${prod.categoria}</p>
-          <p class="product-price">
-            ${prod.precoPromocional ?
-        `R$ ${Number(prod.precoPromocional).toFixed(2)} <span class="product-discount">R$ ${(Number(prod.preco) + 10).toFixed(2)}</span>` :
-        `R$ ${(Number(prod.preco) + 20).toFixed(2)}`
-      }</p>
-          </p>
-          <p class="product-entrega"> entrega em  <strong> ${prod.estimativa_entrega}</strong></p>
-        </div>
-      </div>
-          `).join('');
+useEffect(() => {
+  async function fetchProdutos() {
+    try {
+      const res = await fetch("http://127.0.0.1:8080/produtos/promocionais", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
         }
+      });
+      console.log("Resposta da API:", res);
 
-      } catch (err) {
-        console.error("Erro ao carregar produtos:", err);
+      if (!res.ok) throw new Error("Erro ao buscar produtos");
+
+      const produtosRaw = await res.json();
+      const grid = document.querySelector('.products-grid');
+
+      // 🔁 Converte snake_case para camelCase
+      const produtos = produtosRaw.map(prod => ({
+        nome: prod.nome_Produto,
+        preco: prod.Valor_Produto,
+        precoPromocional: prod.PrecoPromocional,
+        categoria: prod.categoria,
+        caminho_img: prod.caminho_img,
+        estimativa_entrega: prod.Estimativa_Entrega
+      }));
+
+      if (grid && Array.isArray(produtos)) {
+        grid.innerHTML = produtos.map(prod => `
+          <div class="product-card">
+            <div class="product-image">
+              <img src="${prod.caminho_img}" alt="${prod.nome}">
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">${prod.nome}</h3>
+              <p class="product-category">${prod.categoria}</p>
+              <p class="product-price">
+                ${prod.precoPromocional ?
+                  `R$ ${Number(prod.precoPromocional).toFixed(2)} <span class="product-discount">R$ ${(Number(prod.preco) + 10).toFixed(2)}</span>` :
+                  `R$ ${(Number(prod.preco) + 20).toFixed(2)}`
+                }
+              </p>
+              <p class="product-entrega">entrega em <strong>${prod.estimativa_entrega}</strong></p>
+            </div>
+          </div>
+        `).join('');
       }
-    }
 
-    fetchProdutos();
-  }, []);
+    } catch (err) {
+      console.error("Erro ao carregar produtos:", err);
+    }
+  }
+
+  fetchProdutos();
+}, []);
+
 
   return (
     <>

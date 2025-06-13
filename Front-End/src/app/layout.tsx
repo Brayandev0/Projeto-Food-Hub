@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <Head>
         <title>Food Hub</title>
         <meta name="description" content="Delicious food delivered to your door" />

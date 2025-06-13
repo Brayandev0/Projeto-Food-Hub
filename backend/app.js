@@ -1,5 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import { CadastrarProdutos, ProdutosPromocionais } from './src/rotas/produtosRoute.js';
+import { Login } from './src/rotas/loginRoute.js';
+import { cadastrar } from './src/rotas/cadastroRoute.js';
 
 let app = express();
 
@@ -12,14 +15,20 @@ app.use(cors({
 app.use(express.json());
 
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.post("/produtos/cadastro",CadastrarProdutos)
+
+app.get("/produtos/promocionais",ProdutosPromocionais)
+
+app.post("/login",Login)
+
+app.post("/cadastro",cadastrar)
+
+
 
 
 app.use((err, req, res, next) => { // evita que o usuario passe valores invalidos, e evita que o erro vaze do servidor 
     if (err instanceof Error ) {
-        return res.status(500).json({ msg: "Um erro ocorreu com a sua solicitacao", code: 500 });
+        return res.status(500).json({ msg: "Um erro ocorreu com a sua solicitacao" + err, code: 500 });
     }
     next(); 
 });

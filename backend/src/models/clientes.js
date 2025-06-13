@@ -1,6 +1,6 @@
 // models/Cliente.js
 import { database } from "./database.js";
-
+import { DataTypes } from "sequelize";
 
 export const Cliente = database.define("Cliente", {
     id_Clientes: {
