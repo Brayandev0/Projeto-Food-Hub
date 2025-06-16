@@ -22,14 +22,32 @@ export default function Cadastro() {
     e.target.value = value;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const cpf = e.target.cpf.value;
     if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf)) {
       alert("Por favor, insira um CPF válido no formato 000.000.000-00");
       return;
-    }
+    } 
+    let nome = e.target.nome.value;
+    let email = e.target.email.value;
+    let senha = e.target.senha.value; 
     alert("Cadastro realizado com sucesso! (Simulação)");
+    let data_request = await fetch("http://127.0.0.1:8080/cadastro",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          cpf: cpf,
+          senha: senha,
+        }),
+      }
+    )
+    alert(data_request.msg)
     e.target.reset();
   }
 

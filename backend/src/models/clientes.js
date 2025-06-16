@@ -32,6 +32,7 @@ export const Cliente = database.define("Cliente", {
     },
     Endereço: {
       type: DataTypes.STRING(200),
+      allowNull: true, // Permite que o endereço seja nulo
     },
   }, {
     tableName: "Clientes",

@@ -3,14 +3,14 @@ import { Cliente } from "../models/clientes.js";
 export async function cadastrar(req, res) {
     try {
         const {
-            nome_Cliente,
-            CPF,
+            nome,
+            cpf,
             email,
             senha,
-            Endereço
+            
         } = req.body;
 
-        if (!nome_Cliente || !CPF || !email || !senha) {
+        if (!nome || !cpf || !email || !senha) {
             return res.status(400).json({ error: "Campos obrigatórios não preenchidos." });
         }
 
@@ -22,13 +22,13 @@ export async function cadastrar(req, res) {
 
 
         const novoCliente = await Cliente.create({
-            nome_Cliente,
-            CPF,
+            nome_Cliente:nome,
+            cpf,
             email,
             senha,
-            Endereço
+            endereco:null
         });
-
+        console.log("cadastrou cliente")
         res.status(201).json({ message: "Cliente cadastrado com sucesso.", cliente: novoCliente });
     } catch (error) {
         res.status(500).json({ error: "Erro ao cadastrar cliente.", details: error.message });

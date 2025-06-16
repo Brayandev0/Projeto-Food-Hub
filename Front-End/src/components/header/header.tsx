@@ -10,7 +10,7 @@ export function HeaderPrincipal() {
 
     useEffect(() => {
         const token = Cookies.get("tokenAuth");
-        console.log("rfrf4rfefe")
+        console.log("rfrf4rfefehh")
         setIsAuthenticated(!!token);
     }, []);
 
