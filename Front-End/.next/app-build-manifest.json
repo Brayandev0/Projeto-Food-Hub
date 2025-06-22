@@ -24,10 +24,11 @@
       "static/css/app/cadastro/page.css",
       "static/chunks/app/cadastro/page.js"
     ],
-    "/_not-found/page": [
+    "/promocao/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/css/app/promocao/page.css",
+      "static/chunks/app/promocao/page.js"
     ]
   }
 }

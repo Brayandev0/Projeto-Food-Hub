@@ -39,7 +39,7 @@ export function HeaderPrincipal() {
                                 <Link href="/categorias">Categorias</Link>
                             </li>
                             <li>
-                                <Link href="#promocoes">Promoções</Link>
+                                <Link href="/promocao">Promoções</Link>
                             </li>
 
                             {isAuthenticated ? (
