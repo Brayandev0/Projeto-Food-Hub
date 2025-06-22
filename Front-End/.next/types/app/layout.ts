@@ -1,4 +1,4 @@
-// File: C:\Users\1062027\Documents\GitHub\Projeto-Food-Hub\Front-End\src\app\layout.tsx
+// File: /home/brayan_dev/Área de Trabalho/Projeto-Food-Hub/Front-End/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
