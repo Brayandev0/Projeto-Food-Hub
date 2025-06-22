@@ -16,3 +16,8 @@ Verifique as versões com os comandos:
 node -v
 npm -v
 git --version
+
+1 - Instale todas as dependencias com ``npm install``
+instale tanto do back quanto do front end
+
+2 - Caso de erro rode um ``npm install nodemon``
